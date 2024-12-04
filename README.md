@@ -31,8 +31,5 @@ Welcome to the ultimate guide to help you pass the **Certified Kubernetes Admini
 
 ---
 
-## Contribute
-Feel free to fork this repository, submit pull requests, or open issues. Let’s build a strong Kubernetes community together!
-
 ## License
 This project is licensed under the MIT License.
