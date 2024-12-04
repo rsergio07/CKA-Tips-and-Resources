@@ -7,3 +7,6 @@
 ## Simulators and Practice
 - [Killer.sh Exam Simulator](https://killer.sh/cka)
 - [Killercoda Practice Labs](https://killercoda.com/sachin/course/CKA)
+
+## Certification Information
+- [Certified Kubernetes Administrator (CKA) - Official Training](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/)
