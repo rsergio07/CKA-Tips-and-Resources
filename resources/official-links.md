@@ -9,7 +9,6 @@ The official Kubernetes documentation is an invaluable reference for both prepar
 
 - [**Kubernetes Official Docs**](https://kubernetes.io/docs/home/): Comprehensive resource for understanding Kubernetes concepts, configurations, and best practices.
 - [**kubectl Cheat Sheet**](https://kubernetes.io/docs/reference/kubectl/quick-reference/): Quick reference for `kubectl` commands, syntax, and usage examples.
-- [**Kubernetes API Reference**](https://kubernetes.io/docs/reference/kubernetes-api/): Detailed documentation of Kubernetes objects and operations, useful for YAML configurations.
 - [**Tasks in Kubernetes**](https://kubernetes.io/docs/tasks/): Step-by-step guides for practical Kubernetes tasks like deployments, scaling, and resource management.
 
 ---
