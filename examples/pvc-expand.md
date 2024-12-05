@@ -88,13 +88,3 @@ Create a `PersistentVolume` named `task-pv-volume`, a `PersistentVolumeClaim` na
     Verify the Pod:
     ```bash
     kubectl get pod task-pv-pod
-    ```
-
----
-
-4. **Verify the Storage**
-    Once the Pod is `Running`, verify the storage mounted at `/usr/share/nginx/html`:
-    ```bash
-    kubectl exec task-pv-pod -- ls /usr/share/nginx/html
-    ```
-    - This will list the contents of the mounted volume.
