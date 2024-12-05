@@ -1,7 +1,7 @@
 # Configure a Pod to Use PersistentVolume Storage
 
 ### Objective
-Create a `PersistentVolume`, a `PersistentVolumeClaim`, and a Pod to demonstrate basic storage provisioning in Kubernetes.
+Create a `PersistentVolume`, a `PersistentVolumeClaim`, and a `Pod` to demonstrate basic storage provisioning in Kubernetes.
 
 ### Solution
 
