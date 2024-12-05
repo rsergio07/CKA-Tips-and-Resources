@@ -1,7 +1,7 @@
 # Configure a Pod to Use a PersistentVolume for Storage
 
 ### Objective
-Create a `PersistentVolumeClaim` and a Pod that uses the PVC for storage. Expand the PVC capacity to 70Mi afterward.
+Create a `PersistentVolumeClaim` with a storage request of `50Mi` using the `standard` storage class. Then, configure a Pod to use this PVC for storage. Finally, expand the PVC capacity to `70Mi` to demonstrate how to dynamically adjust storage in Kubernetes.
 
 ### Solution
 
@@ -17,7 +17,7 @@ Create a `PersistentVolumeClaim` and a Pod that uses the PVC for storage. Expand
       resources:
         requests:
           storage: 50Mi
-      storageClassName: standard  # Use a suitable storage class
+      storageClassName: standard
     ```
     Apply the configuration:
     ```bash
