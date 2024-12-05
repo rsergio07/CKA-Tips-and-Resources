@@ -1,22 +1,26 @@
 # Configure a Pod to Use PersistentVolume Storage
 
 ### Objective
-Create a `PersistentVolume`, a `PersistentVolumeClaim`, and a `Pod` to demonstrate basic storage provisioning in Kubernetes.
+Create a `PersistentVolume` named `task-pv-volume`, a `PersistentVolumeClaim` named `task-pv-claim`, and a Pod named `task-pv-pod` that uses the PVC for storage. The storage will be mounted into the Pod at `/usr/share/nginx/html`.
+
+---
 
 ### Solution
 
-1. Create the PersistentVolume YAML file `pv-volume.yaml`:
+1. **Create the PersistentVolume (`pv-volume.yaml`)**
     ```yaml
     apiVersion: v1
     kind: PersistentVolume
     metadata:
-      name: pv-volume
+      name: task-pv-volume
+      labels:
+        type: local
     spec:
+      storageClassName: manual
       capacity:
         storage: 10Gi
       accessModes:
         - ReadWriteOnce
-      persistentVolumeReclaimPolicy: Retain
       hostPath:
         path: "/mnt/data"
     ```
@@ -26,49 +30,56 @@ Create a `PersistentVolume`, a `PersistentVolumeClaim`, and a `Pod` to demonstra
     ```
     Verify the PersistentVolume:
     ```bash
-    kubectl get pv pv-volume
+    kubectl get pv task-pv-volume
     ```
 
-2. Create the PersistentVolumeClaim YAML file `pvc-volume.yaml`:
+---
+
+2. **Create the PersistentVolumeClaim (`pvc-claim.yaml`)**
     ```yaml
     apiVersion: v1
     kind: PersistentVolumeClaim
     metadata:
-      name: pvc-volume
+      name: task-pv-claim
     spec:
+      storageClassName: manual
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
-          storage: 8Gi
+          storage: 3Gi
     ```
     Apply the configuration:
     ```bash
-    kubectl apply -f pvc-volume.yaml
+    kubectl apply -f pvc-claim.yaml
     ```
     Verify the PersistentVolumeClaim:
     ```bash
-    kubectl get pvc pvc-volume
+    kubectl get pvc task-pv-claim
     ```
 
-3. Create the Pod YAML file `pod-using-pvc.yaml`:
+---
+
+3. **Create the Pod (`pod-using-pvc.yaml`)**
     ```yaml
     apiVersion: v1
     kind: Pod
     metadata:
-      name: pvc-pod
+      name: task-pv-pod
     spec:
-      containers:
-      - name: busybox
-        image: busybox
-        command: [ "sleep", "3600" ]
-        volumeMounts:
-        - mountPath: "/mnt/data"
-          name: volume
       volumes:
-      - name: volume
-        persistentVolumeClaim:
-          claimName: pvc-volume
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim
+      containers:
+        - name: task-pv-container
+          image: nginx
+          ports:
+            - containerPort: 80
+              name: "http-server"
+          volumeMounts:
+            - mountPath: "/usr/share/nginx/html"
+              name: task-pv-storage
     ```
     Apply the configuration:
     ```bash
@@ -76,11 +87,14 @@ Create a `PersistentVolume`, a `PersistentVolumeClaim`, and a `Pod` to demonstra
     ```
     Verify the Pod:
     ```bash
-    kubectl get pod pvc-pod
+    kubectl get pod task-pv-pod
     ```
 
-4. Verify that the storage is mounted:
+---
+
+4. **Verify the Storage**
+    Once the Pod is `Running`, verify the storage mounted at `/usr/share/nginx/html`:
     ```bash
-    kubectl exec pvc-pod -- ls /mnt/data
+    kubectl exec task-pv-pod -- ls /usr/share/nginx/html
     ```
-    - This command will list the contents of the mounted volume inside the Pod.
+    - This will list the contents of the mounted volume.
