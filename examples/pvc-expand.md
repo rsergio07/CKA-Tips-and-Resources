@@ -25,6 +25,10 @@ Create a `PersistentVolume`, a `PersistentVolumeClaim`, and a Pod that uses the 
     ```bash
     kubectl apply -f pv-storage.yaml
     ```
+    Verify the PersistentVolume:
+    ```bash
+    kubectl get pv pv-storage
+    ```
 
 2. Create the PersistentVolumeClaim YAML file `pvc-storage.yaml`:
     ```yaml
@@ -43,6 +47,10 @@ Create a `PersistentVolume`, a `PersistentVolumeClaim`, and a Pod that uses the 
     Apply the configuration:
     ```bash
     kubectl apply -f pvc-storage.yaml
+    ```
+    Verify the PersistentVolumeClaim:
+    ```bash
+    kubectl get pvc pvc-storage
     ```
 
 3. Create the Pod YAML file `pvc-pod.yaml`:
@@ -66,6 +74,10 @@ Create a `PersistentVolume`, a `PersistentVolumeClaim`, and a Pod that uses the 
     Apply the configuration:
     ```bash
     kubectl apply -f pvc-pod.yaml
+    ```
+    Verify the Pod:
+    ```bash
+    kubectl get pod pvc-pod
     ```
 
 4. Expand the PersistentVolumeClaim capacity by editing the existing `pvc-storage.yaml`:
