@@ -1,3 +1,39 @@
+## Exercise: Kubernetes Storage and Persistent Volumes
+
+### Objective
+In this exercise, you will create and configure Kubernetes storage resources, including a StorageClass, PersistentVolume (PV), PersistentVolumeClaim (PVC), and a Pod. The goal is to demonstrate how to provision and use persistent storage effectively.
+
+### Tasks
+
+1. **Create a StorageClass**:  
+   Define a StorageClass named `fast-storage` with the following properties:  
+   - Provisioner: `kubernetes.io/no-provisioner`  
+   - Volume Binding Mode: `Immediate`
+
+2. **Create a PersistentVolume (PV)**:  
+   Configure a PersistentVolume named `fast-pv-cka` with the following specifications:  
+   - Storage Capacity: `50Mi`  
+   - StorageClassName: `fast-storage`  
+   - Access Mode: `ReadWriteOnce`  
+   - Host Path: `/tmp/fast-data`  
+
+3. **Create a PersistentVolumeClaim (PVC)**:  
+   Define a PersistentVolumeClaim named `fast-pvc-cka` that:  
+   - Requests `30Mi` of storage  
+   - Uses the `fast-storage` StorageClass  
+   - Binds to the `fast-pv-cka` PersistentVolume  
+
+4. **Create a Pod**:  
+   Deploy a Pod named `fast-pod-cka` with the following configuration:  
+   - Container Image: `nginx:latest`  
+   - Mounts the `fast-pvc-cka` PVC at the path `/app/data`  
+
+---
+
+### Solution
+Follow the step-by-step instructions provided in the YAML and command examples to complete the exercise. Each step includes detailed verification commands to ensure the setup is correct. Use the provided cleanup instructions to delete the resources after testing.
+
+
 ```yaml
 # Step 1: Create the StorageClass
 apiVersion: storage.k8s.io/v1
