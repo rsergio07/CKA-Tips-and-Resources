@@ -1,34 +1,57 @@
-# Configure a Pod to Use a PersistentVolume for Storage
+# Configure a Pod to Use PersistentVolume Storage
 
 ### Objective
-Create a `PersistentVolumeClaim` with a storage request of `50Mi` using the `standard` storage class. Then, configure a Pod to use this PVC for storage. Finally, expand the PVC capacity to `70Mi` to demonstrate how to dynamically adjust storage in Kubernetes.
+Create a `PersistentVolume`, a `PersistentVolumeClaim`, and a Pod to demonstrate basic storage provisioning in Kubernetes.
 
 ### Solution
 
-1. Create the PersistentVolumeClaim YAML file `pvc-storage.yaml`:
+1. Create the PersistentVolume YAML file `pv-volume.yaml`:
+    ```yaml
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: pv-volume
+    spec:
+      capacity:
+        storage: 10Gi
+      accessModes:
+        - ReadWriteOnce
+      persistentVolumeReclaimPolicy: Retain
+      hostPath:
+        path: "/mnt/data"
+    ```
+    Apply the configuration:
+    ```bash
+    kubectl apply -f pv-volume.yaml
+    ```
+    Verify the PersistentVolume:
+    ```bash
+    kubectl get pv pv-volume
+    ```
+
+2. Create the PersistentVolumeClaim YAML file `pvc-volume.yaml`:
     ```yaml
     apiVersion: v1
     kind: PersistentVolumeClaim
     metadata:
-      name: pvc-storage
+      name: pvc-volume
     spec:
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
-          storage: 50Mi
-      storageClassName: standard
+          storage: 8Gi
     ```
     Apply the configuration:
     ```bash
-    kubectl apply -f pvc-storage.yaml
+    kubectl apply -f pvc-volume.yaml
     ```
     Verify the PersistentVolumeClaim:
     ```bash
-    kubectl get pvc pvc-storage
+    kubectl get pvc pvc-volume
     ```
 
-2. Create the Pod YAML file `pvc-pod.yaml`:
+3. Create the Pod YAML file `pod-using-pvc.yaml`:
     ```yaml
     apiVersion: v1
     kind: Pod
@@ -36,51 +59,28 @@ Create a `PersistentVolumeClaim` with a storage request of `50Mi` using the `sta
       name: pvc-pod
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      - name: busybox
+        image: busybox
+        command: [ "sleep", "3600" ]
         volumeMounts:
-        - mountPath: "/usr/share/nginx/html"
-          name: storage
+        - mountPath: "/mnt/data"
+          name: volume
       volumes:
-      - name: storage
+      - name: volume
         persistentVolumeClaim:
-          claimName: pvc-storage
+          claimName: pvc-volume
     ```
     Apply the configuration:
     ```bash
-    kubectl apply -f pvc-pod.yaml
+    kubectl apply -f pod-using-pvc.yaml
     ```
     Verify the Pod:
     ```bash
     kubectl get pod pvc-pod
     ```
 
-3. Expand the PersistentVolumeClaim capacity by editing the existing `pvc-storage.yaml`:
-    Update the `resources.requests.storage` value in the file:
-    ```yaml
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: pvc-storage
-    spec:
-      accessModes:
-        - ReadWriteOnce
-      resources:
-        requests:
-          storage: 70Mi
-      storageClassName: standard  # Use a suitable storage class
-    ```
-    Re-apply the updated configuration:
+4. Verify that the storage is mounted:
     ```bash
-    kubectl apply -f pvc-storage.yaml
+    kubectl exec pvc-pod -- ls /mnt/data
     ```
-
-4. Verify the expansion:
-    ```bash
-    kubectl describe pvc pvc-storage
-    ```
-
-5. Check the updated storage in the Pod:
-    ```bash
-    kubectl exec pvc-pod -- df -h /usr/share/nginx/html
-    ```
+    - This command will list the contents of the mounted volume inside the Pod.
