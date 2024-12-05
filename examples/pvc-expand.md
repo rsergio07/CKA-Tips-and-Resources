@@ -68,20 +68,24 @@ Create a `PersistentVolume`, a `PersistentVolumeClaim`, and a Pod that uses the 
     kubectl apply -f pvc-pod.yaml
     ```
 
-4. Expand the PersistentVolumeClaim capacity. Create the YAML file `pvc-expand.yaml`:
+4. Expand the PersistentVolumeClaim capacity by editing the existing `pvc-storage.yaml`:
+    Update the `resources.requests.storage` value in the file:
     ```yaml
     apiVersion: v1
     kind: PersistentVolumeClaim
     metadata:
       name: pvc-storage
     spec:
+      accessModes:
+        - ReadWriteOnce
       resources:
         requests:
           storage: 70Mi
+      storageClassName: manual
     ```
-    Apply the updated configuration:
+    Re-apply the updated configuration:
     ```bash
-    kubectl apply -f pvc-expand.yaml
+    kubectl apply -f pvc-storage.yaml
     ```
 
 5. Verify the expansion:
