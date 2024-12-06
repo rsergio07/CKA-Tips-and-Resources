@@ -1,7 +1,7 @@
 # Count Ready Nodes Excluding NoSchedule Taint
 
 ## Objective
-Count how many Kubernetes nodes are in the `Ready` state, excluding those with the `NoSchedule` taint, and write the resulting count to the file `/var/log/k8s00402.txt`.
+Count how many Kubernetes nodes are in the `Ready` state, excluding those with the `NoSchedule` taint, and write the resulting count to the file `/var/log/node-ready-count.txt`.
 
 ## Solution
 1. Verify the taints on the `controlplane` and `node01` nodes:
@@ -29,9 +29,9 @@ Count how many Kubernetes nodes are in the `Ready` state, excluding those with t
     node01         Ready    <none>
     ```
 
-3. Count the number of `Ready` nodes without taints and write the result to `/var/log/k8s00402.txt` using `echo`:
+3. Count the number of `Ready` nodes without taints and write the result to `/var/log/node-ready-count.txt` using `echo`:
     ```bash
-    echo 1 > /var/log/k8s00402.txt
+    echo 1 > /var/log/node-ready-count.txt
     ```
 
     Replace `1` with the actual count after manually verifying the nodes and their taints from the output above.
