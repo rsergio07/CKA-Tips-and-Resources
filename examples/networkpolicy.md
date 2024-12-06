@@ -1,7 +1,7 @@
-# Create a NetworkPolicy
+# Create a NetworkPolicy for External Access
 
 ### Objective
-Create a `NetworkPolicy` named `allow-port-from-namespace` in the `fubar` namespace to allow pods in the `internal` namespace to connect to port 9000 in `fubar`.
+Create a `NetworkPolicy` named `allow-external-access` in the `frontend` namespace to allow pods in the `backend` namespace to connect to port 8080 in `frontend`.
 
 ### Solution
 1. Create the NetworkPolicy YAML file:
@@ -9,18 +9,18 @@ Create a `NetworkPolicy` named `allow-port-from-namespace` in the `fubar` namesp
     apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
-      name: allow-port-from-namespace
-      namespace: fubar
+      name: allow-external-access
+      namespace: frontend
     spec:
       podSelector: {}
       ingress:
       - from:
         - namespaceSelector:
             matchLabels:
-              name: internal
+              name: backend
         ports:
         - protocol: TCP
-          port: 9000
+          port: 8080
     ```
 2. Apply the configuration:
     ```bash
