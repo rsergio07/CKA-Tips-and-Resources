@@ -19,7 +19,7 @@ Structured courses and additional materials to enhance your understanding and pr
 ## 🛠️ Practice Simulators and Labs
 Practice is crucial for mastering Kubernetes and succeeding in the exam. Use these simulators and labs to sharpen your skills in real-world scenarios.
 
-- [**Killercoda Labs**](https://killercoda.com/sachin/course/CKA): Free interactive labs with scenarios closely aligned to the CKA exam.
+- [**Killercoda Labs**](https://killercoda.com): Free interactive labs with scenarios closely aligned to the CKA exam.
 - [**Killer.sh Exam Simulator**](https://killer.sh/cka): The official Linux Foundation exam simulator, offering a realistic environment to practice CKA-like tasks. Includes two free attempts when registering for the exam.
 
 ---
