@@ -1,5 +1,7 @@
 # Certified Kubernetes Administrator (CKA) - Tips and Resources
 
+[**Certified Kubernetes Administrator (CKA) - Official Training**](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/): The Linux Foundation's official training program for the CKA certification, including in-depth labs and guided lessons.
+
 Welcome to the ultimate guide to help you pass the **Certified Kubernetes Administrator (CKA)** exam! This repository includes tips, curated resources, and hands-on examples to boost your preparation.
 
 ## What's Inside
