@@ -9,9 +9,7 @@ Structured courses and additional materials to enhance your understanding and pr
 
 - [**Certified Kubernetes Administrator (CKA) - Official Training**](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/): The Linux Foundation's official training program for the CKA certification, including in-depth labs and guided lessons.
 - [**CKA Program Changes**](https://training.linuxfoundation.org/certified-kubernetes-administrator-cka-program-changes/): Stay updated with changes to the CKA program, including new topics and format updates.
-- [**Kubestronaut Program**](https://training.linuxfoundation.org/resources/kubestronaut-program/): A free Linux Foundation program to guide beginners into Kubernetes through training and community support.
 - [**Udemy: Certified Kubernetes Administrator with Practice Tests**](https://ibm-learning.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/): Highly-rated course with hands-on labs and mock exams.
-- [**KodeKloud CKA Training**](https://kodekloud.com/p/certified-kubernetes-administrator-cka): Comprehensive training with interactive labs, quizzes, and exam tips.
 - [**Linux Foundation Certification Retake Policy**](https://training.linuxfoundation.org/about/policies/certification-exam-retake-policy/): Information about retake policies for Linux Foundation exams, including CKA.
 
 ---
@@ -29,7 +27,6 @@ The official Kubernetes documentation is an invaluable reference for both prepar
 
 - [**Kubernetes Official Docs**](https://kubernetes.io/docs/home/): Comprehensive resource for understanding Kubernetes concepts, configurations, and best practices.
 - [**kubectl Cheat Sheet**](https://kubernetes.io/docs/reference/kubectl/quick-reference/): Quick reference for `kubectl` commands, syntax, and usage examples.
-- [**Tasks in Kubernetes**](https://kubernetes.io/docs/tasks/): Step-by-step guides for practical Kubernetes tasks like deployments, scaling, and resource management.
 
 ---
 
